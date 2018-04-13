@@ -26,7 +26,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
     BufferedImage plantilla = null;
     private int contador = 0;
-    private int ancho = 200, alto = 200;
+    private int ancho = 300, alto = 300;
     int total_pokemons = 0;
     // conectamos a la base de datos
 
@@ -43,8 +43,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
      * Creates new form VentanaPokedex
      */
     private ImageIcon devuelveElPokemonQueEstaEnLaPosicion (int posicion){
-        int columna = posicion / 31;
-        int fila = posicion % 31;
+        int columna = posicion / 30;
+        int fila = posicion % 30;
         return ( new ImageIcon(plantilla.getSubimage(fila*96+1, columna*96+1, 96, 96)
                 .getScaledInstance(ancho, alto, Image.SCALE_DEFAULT))); 
     }
@@ -69,7 +69,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
         //conexion a la base de datos//////////////////
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/test","root","root");
+            conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/pokemon","root","");
             estado = conexion.createStatement();
             resultadoConsulta = estado.executeQuery("Select * from pokemon");
             //cargo el resultado de la query en mi hashmap
@@ -103,29 +103,43 @@ public class VentanaPokedex extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("izquierda");
+        jButton1.setContentAreaFilled(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, -1, -1));
 
         jButton2.setText("derecha");
+        jButton2.setContentAreaFilled(false);
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton2MousePressed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
 
+        jLabel1.setBackground(new java.awt.Color(153, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 153, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 200, 41));
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 230, 230));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 220, 60));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 230, 230));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\DOCUMENTOS\\Pokedex.png")); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -160, 780, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,5 +199,6 @@ public class VentanaPokedex extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
